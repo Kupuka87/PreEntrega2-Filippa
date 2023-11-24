@@ -1,4 +1,7 @@
-const shopContenido = document.getElementById("shopContenido")
+const shopContenido = document.getElementById("shopContenido");
+const verCarrito = document.getElementById("verCarrito");
+const modalContainer = document.getElementById("modal-container");
+
 
 const productos = [
     {
@@ -24,18 +27,6 @@ const productos = [
     nombre: "Arnes",
     precio: 12000,
     img: "https://www.nakaoutdoors.com.ar/img/articulos/edelrid_arnes_jay_iii_imagen1.jpg" 
-},
-{
-    id: 6,
-    nombre: "Casco",
-    precio: 13000,
-    img: "https://www.nakaoutdoors.com.ar/img/articulos/2023/05/edelrid_zodiac_imagen1.jpg" 
-},
-    {
-    id: 6,
-    nombre: "Pedula",
-    precio: 15000,
-    img: "https://www.nakaoutdoors.com.ar/img/articulos/2021/10/la_sportiva_cobra_4_99_7_imagen1.jpg" 
 },
 ];
 
@@ -65,6 +56,40 @@ productos.forEach((product)=> {
             nombre : product.nombre,
             precio : product.precio,
         });
-        console.log(carrito);
+       
+    });
+});
+
+verCarrito.addEventListener("click", () => {
+    const modalHeader = document.createElement("div");
+    modalHeader.className = "modal-header";
+    modalHeader.innerHTML = `
+    <h1 class="modal-header-title">Carrito.</h1>
+    `;
+    modalContainer.append(modalHeader);
+
+    const modalboton = document.createElement ("h1");
+    modalboton.innerText = "X";
+    modalboton.className = "modal-header-button"; 
+
+    modalHeader.append(modalboton);
+
+    carrito.forEach((product) => {
+        let carritoContent = document.createElement("div")
+        carritoContent.className = "modal-content"
+        carritoContent.innerHTML = `
+            <img src="${product.img}">
+            <h3>${product.nombre}</h3>
+            <p>${product.precio} $</p>
+        `;
+        modalContainer.append(carritoContent)
     })
-})
+   
+    const total = carrito.reduce((acc, el) = acc + el.precio, 0);
+
+    const totalCompra = document.createElement("div");
+    totalCompra.className = "total-content";
+    totalCompra.innerHTML= `total a pagar: ${total} $`;
+    modalContainer.append(totalCompra);
+});
+
