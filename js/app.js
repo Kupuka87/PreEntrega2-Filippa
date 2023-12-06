@@ -12,19 +12,19 @@ const productos = [
 },
     {
     id: 1,
-    nombre: "Mosqueton",
+    nombre: "Mosquetón",
     precio: 20000,
     img: "https://www.nakaoutdoors.com.ar/img/articulos/2022/08/singing_rock_colt_negro_imagen1.jpg" 
 },
     {
     id: 3,
-    nombre: "Cordin",
+    nombre: "Cordín",
     precio: 2000,
     img: "https://www.nakaoutdoors.com.ar/img/articulos/2022/11/kong_cordin_5mm_imagen1.jpg" 
 },
     {
     id: 4,
-    nombre: "Arnes",
+    nombre: "Arnés",
     precio: 12000,
     img: "https://www.nakaoutdoors.com.ar/img/articulos/edelrid_arnes_jay_iii_imagen1.jpg" 
 },
@@ -61,6 +61,8 @@ productos.forEach((product)=> {
 });
 
 verCarrito.addEventListener("click", () => {
+    modalContainer.innerHTML = ""
+    modalContainer.style.display = "flex"
     const modalHeader = document.createElement("div");
     modalHeader.className = "modal-header";
     modalHeader.innerHTML = `
@@ -71,6 +73,10 @@ verCarrito.addEventListener("click", () => {
     const modalboton = document.createElement ("h1");
     modalboton.innerText = "X";
     modalboton.className = "modal-header-button"; 
+
+    modalboton.addEventListener("click" , () => {
+        modalContainer.style.display = "none";
+    })
 
     modalHeader.append(modalboton);
 
@@ -89,7 +95,10 @@ verCarrito.addEventListener("click", () => {
 
     const totalCompra = document.createElement("div")
     totalCompra.className ="total-content"
-    totalCompra.innerHTML = `total a pagar: ${total} $`; 
+    totalCompra.innerHTML = `Total a pagar: ${total} $`; 
     modalContainer.append(totalCompra);
 });
+
+
+
 
